@@ -1,0 +1,6 @@
+pydantic
+requests-cache
+aiohttp
+aiohttp-client-cache
+aiofiles
+aiosqlite
