@@ -1,4 +1,5 @@
 """Things that don't really warrant their own module"""
+
 from typing import TYPE_CHECKING
 
 import pydantic
@@ -15,7 +16,9 @@ bool_adapter = pydantic.TypeAdapter(bool)
 
 def is_map_liked(map_slug: 'MapSlug') -> bool:
 	"""Returns whether or not the logged in user likes a given map"""
-	return bool_adapter.validate_json(call_api(f'api/v3/likes/{map_slug}', do_not_cache=True, needs_auth=True))
+	return bool_adapter.validate_json(
+		call_api(f'api/v3/likes/{map_slug}', do_not_cache=True, needs_auth=True)
+	)
 
 
 async def is_map_liked_async(
@@ -23,19 +26,21 @@ async def is_map_liked_async(
 ) -> bool:
 	"""Returns whether or not the logged in user likes a given map"""
 	return bool_adapter.validate_json(
-		await call_api_async(f'api/v3/likes/{map_slug}', session=session, do_not_cache=True, needs_auth=True)
+		await call_api_async(
+			f'api/v3/likes/{map_slug}', session=session, do_not_cache=True, needs_auth=True
+		)
 	)
 
 
 # TODO https://www.geoguessr.com/api/v3/likes?page= - MapDetails of all the liked maps
 # async getMyLikedMapsV2(e) {
-#     let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 10,
-#     a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : void 0;
-#     try {
-#       let {
-#         payload: n
-#       }
-#       = await r.Mb.get('/api/v3/likes/maps?limit='.concat((0, r.Nw) (t)).concat(e ? '&paginationToken='.concat((0, r.Nw) (e)) : ''), a);
+# let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 10,
+# a = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : void 0;
+# try {
+# let {
+# payload: n
+# }
+# = await r.Mb.get('/api/v3/likes/maps?limit='.concat((0, r.Nw) (t)).concat(e ? '&paginationToken='.concat((0, r.Nw) (e)) : ''), a);
 
 # https://geoguessr.com/api/v4/seasons/active/
 # https://geoguessr.com/api/v4/seasons/active/user-season

@@ -12,7 +12,9 @@ if TYPE_CHECKING:
 
 def get_personalized_map() -> Map:
 	"""Map for where current user lives"""
-	return Map.model_validate_json(call_api('/api/v3/social/maps/browse/personalized', needs_auth=True))
+	return Map.model_validate_json(
+		call_api('/api/v3/social/maps/browse/personalized', needs_auth=True)
+	)
 
 
 async def get_personalized_map_async(session: 'aiohttp.ClientSession | None' = None) -> Map:
@@ -23,9 +25,7 @@ async def get_personalized_map_async(session: 'aiohttp.ClientSession | None' = N
 
 
 def get_random_map() -> Map:
-	return Map.model_validate_json(
-		call_api('api/v3/social/maps/browse/random', do_not_cache=True)
-	)
+	return Map.model_validate_json(call_api('api/v3/social/maps/browse/random', do_not_cache=True))
 
 
 async def get_random_map_async(session: 'aiohttp.ClientSession | None' = None) -> Map:
@@ -80,16 +80,16 @@ async def get_official_maps_async(session: 'aiohttp.ClientSession | None' = None
 
 # TODO: /api/v3/social/maps/browse/recommended?mapId=
 #   async getRecommendedMaps(e) {
-#     let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 3,
-#     a = arguments.length > 2 ? arguments[2] : void 0;
-#     try {
-#       let {
-#         payload: n
-#       }
-#       = await r.Mb.get('/api/v3/social/maps/browse/recommended?mapId='.concat((0, r.Nw) (e), '&count=').concat((0, r.Nw) (t)), a);
-#       return (0, i.RP) (n)
-#     } catch (e) {
-#     }
+# let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 3,
+# a = arguments.length > 2 ? arguments[2] : void 0;
+# try {
+# let {
+# payload: n
+# }
+# = await r.Mb.get('/api/v3/social/maps/browse/recommended?mapId='.concat((0, r.Nw) (e), '&count=').concat((0, r.Nw) (t)), a);
+# return (0, i.RP) (n)
+# } catch (e) {
+# }
 #   }
 # },
 

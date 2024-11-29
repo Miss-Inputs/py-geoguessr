@@ -17,7 +17,7 @@ def login(email: str, password: str) -> UserDetails:
 	Sets _ncfa and session cookies, the former is what counts you as logged in
 
 	Returns:
-	    UserDetails of user you logged in as"""
+		UserDetails of user you logged in as"""
 	#So yes, this does work, it's just that it's paired with logout
 	data = {'email': email, 'password': password}
 	return UserDetails.model_validate_json(
@@ -37,7 +37,7 @@ async def login_async(
 	Sets _ncfa and session cookies, the former is what counts you as logged in
 
 	Returns:
-	    UserDetails of user you logged in as"""
+		UserDetails of user you logged in as"""
 	data = {'email': email, 'password': password}
 	return UserDetails.model_validate_json(
 		await call_api_async(
@@ -58,7 +58,7 @@ def logout() -> str:
 	"""Note: Doesn't seem to work - doesn't seem to invalidate the cookie, so I dunno how it works then
 
 	Returns:
-	    A message"""
+		A message"""
 	response = call_api(
 		'https://geoguessr.com/api/v3/accounts/signout', method='POST', do_not_cache=True
 	)
@@ -69,7 +69,7 @@ async def logout_async(session: 'aiohttp.ClientSession | None' = None) -> str:
 	"""Note: Doesn't seem to work - doesn't seem to invalidate the cookie, so I dunno how it works then
 
 	Returns:
-	    A message"""
+		A message"""
 	response = await call_api_async(
 		'https://geoguessr.com/api/v3/accounts/signout', session, method='POST', do_not_cache=True
 	)

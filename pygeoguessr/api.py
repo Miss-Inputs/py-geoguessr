@@ -73,7 +73,7 @@ def get_default_async_session(*, cached: bool = True) -> aiohttp.ClientSession:
 	"""Gets a session for use with the async functions, which may be a cached session by default but optionally not.
 
 	Returns:
-	        ClientSession or CachedSession"""
+		ClientSession or CachedSession"""
 	if not cached:
 		return aiohttp.ClientSession()
 	with warnings.catch_warnings(action='ignore', category=DeprecationWarning):
@@ -124,16 +124,16 @@ def call_api(
 ) -> str:
 	"""
 	Arguments:
-	        url: URL to yoink
-	        params: Query params
-	        expiry: Custom expire_after param
+		url: URL to yoink
+		params: Query params
+		expiry: Custom expire_after param
 
 	Raises:
-			UnauthorizedError: On 401 errors
-	        NotFoundError: On 404 errors
+		UnauthorizedError: On 401 errors
+		NotFoundError: On 404 errors
 
 	Returns:
-	        JSON as str
+		JSON as str
 	"""
 	if do_not_cache:
 		expiry = requests_cache.DO_NOT_CACHE
@@ -183,19 +183,19 @@ async def call_api_async(
 ):
 	"""
 	Arguments:
-	        url: URL to yoink
-	        params: Query params
-	        expiry: Custom expire_after param
+			url: URL to yoink
+			params: Query params
+			expiry: Custom expire_after param
 
 	Raises:
 			UnauthorizedError: On 401 errors
-	        NotFoundError: On 404 errors
+			NotFoundError: On 404 errors
 
 	Returns:
-	        JSON as str
+			JSON as str
 	"""
 	if session is None:
-		#TODO: Does this actually work, or does it always create a race condition with the redirects database?
+		# TODO: Does this actually work, or does it always create a race condition with the redirects database?
 		async with get_default_async_session() as default_session:
 			return await call_api_async(url, default_session, params, expiry, method, json_body)
 

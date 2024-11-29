@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Annotated
 
 import pydantic
 
-#ruff: noqa: TCH001
+# ruff: noqa: TC001
 from pygeoguessr.api import call_api, call_api_async
 from pygeoguessr.models import Map, MapImages
 from pygeoguessr.settings import BaseModel
@@ -72,6 +72,6 @@ async def get_explorer_mode_maps_async(
 	)
 
 
-# TODO: #          = await r.Mb.get('/api/maps?createdBy='.concat((0, r.Nw) (e)) + '&page='.concat((0, r.Nw) (t)) + '&count='.concat((0, r.Nw) (a)), n);
+# TODO: #		  = await r.Mb.get('/api/maps?createdBy='.concat((0, r.Nw) (e)) + '&page='.concat((0, r.Nw) (t)) + '&count='.concat((0, r.Nw) (a)), n);
 # TODO api/maps/map-of-the-day
 # TODO: api/maps?createdBy=(user ID)&page=(page)&count=(count, default 9?) -> list of map objects (without createdBy or with createdBy empty string, returns official maps)

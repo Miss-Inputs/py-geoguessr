@@ -2,15 +2,11 @@
 
 from enum import StrEnum
 
-#ruff: noqa: TCH001
+# ruff: noqa: TCH001
 from pygeoguessr.api import call_api
 from pygeoguessr.models import DivisionInfo, ProgressRankDivision, UserAvatar
 from pygeoguessr.settings import BaseModel
-from pygeoguessr.types import (
-	CountryCode,
-	LobbyToken,
-	UserID,
-)
+from pygeoguessr.types import CountryCode, LobbyToken, UserID
 
 DuelTeamID = str
 """Opaque ID for a team in a duel"""
@@ -63,25 +59,27 @@ class Player(BaseModel):
 	isGuest: bool
 
 
-
-
 def get_battle_royale_details(lobby: LobbyToken):
-	#TODO: Handle "You need to be logged in as a guest to do this."
-	return call_api(f'https://game-server.geoguessr.com/api/battle-royale/{lobby}', needs_auth=False)
+	# TODO: Handle "You need to be logged in as a guest to do this."
+	return call_api(
+		f'https://game-server.geoguessr.com/api/battle-royale/{lobby}', needs_auth=False
+	)
 
 
 def get_bullseye_details(lobby: LobbyToken):
-	#TODO: Handle "You need to be logged in as a guest to do this."
+	# TODO: Handle "You need to be logged in as a guest to do this."
 	return call_api(f'https://game-server.geoguessr.com/api/bullseye/{lobby}', needs_auth=False)
 
 
 def get_live_challenge_details(lobby: LobbyToken):
-	#TODO: Handle "You need to be logged in as a guest to do this."
-	return call_api(f'https://game-server.geoguessr.com/api/live-challenge/{lobby}', needs_auth=False)
+	# TODO: Handle "You need to be logged in as a guest to do this."
+	return call_api(
+		f'https://game-server.geoguessr.com/api/live-challenge/{lobby}', needs_auth=False
+	)
 
 
 # TODO: https://game-server.geoguessr.com/api/replays/{player ID}/{duel ID}/{round number} - hell yeah mothafucka
 # time is maybe an epoch (1697970517079, 1697970622350), type = one of these
-#            (n = s || (s = {})).PanoPosition = "PanoPosition", n.PanoPov = "PanoPov", n.PanoZoom = "PanoZoom", n.MapZoom = "MapZoom", n.MapPosition = "MapPosition", n.PinPosition = "PinPosition", n.Guess = "Guess", n.Focus = "Focus", n.Timer = "Timer", n.KeyPress = "KeyPress", n.MapDisplay = "MapDisplay";
+# (n = s || (s = {})).PanoPosition = "PanoPosition", n.PanoPov = "PanoPov", n.PanoZoom = "PanoZoom", n.MapZoom = "MapZoom", n.MapPosition = "MapPosition", n.PinPosition = "PinPosition", n.Guess = "Guess", n.Focus = "Focus", n.Timer = "Timer", n.KeyPress = "KeyPress", n.MapDisplay = "MapDisplay";
 # payload = lat/lng for MapPosition, lat/lng/panoId for PanoPosition, zoom for MapZoom/PanoZoom (likely different meanings, MapZoom is probably the slippy map level, PanoZoom seems to be between 0 and 1 and would be the Street View parameter), isActive/isSticky/size for MapDisplay, heading/pitch for PanoPov
 # This does require authorization

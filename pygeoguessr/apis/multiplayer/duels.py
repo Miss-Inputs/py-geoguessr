@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from enum import StrEnum
 from typing import TYPE_CHECKING, Annotated, Literal
 
-#ruff: noqa: TCH001, TCH002
+# ruff: noqa: TCH001, TCH002
 import pydantic
 
 from pygeoguessr.api import call_api, call_api_async
@@ -119,6 +119,13 @@ class DuelMap(BaseModel):
 	maxErrorDistance: Metres
 
 
+class GameContext(BaseModel):
+	"""TODO: What does this do?"""
+
+	type: str
+	id: str
+
+
 class DuelOptions(BaseModel):
 	"""Mostly frickin duplicated from movementOptions and lobby gameOptions?"""
 
@@ -138,9 +145,7 @@ class DuelOptions(BaseModel):
 	multiplierIncrement: int
 	disableHealing: bool
 	isTeamDuels: bool
-	gameContext: (
-		dict[Literal['type', 'id'], str] | None
-	)  # TODO: What does this do, and should we make a proper model for it
+	gameContext: GameContext | None
 	# manuallyStartRounds: bool
 	# nope that one's not a thing anymore
 	flashbackRounds: list[None]
