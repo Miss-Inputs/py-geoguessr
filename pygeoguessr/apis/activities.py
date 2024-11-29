@@ -183,7 +183,7 @@ async def _get_activity_feed_page_async(
 	friends: bool = False,
 ) -> ActivityFeedPage:
 	feed_type = 'friends' if friends else 'private'
-	url = f'https://geoguessr.com/api/v4/feed/{feed_type}'
+	url = f'https://www.geoguessr.com/api/v4/feed/{feed_type}'
 	params: dict[str, str | int] = {'count': per_page}
 	if pagination_token:
 		params['paginationToken'] = pagination_token
