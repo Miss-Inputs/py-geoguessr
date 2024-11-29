@@ -145,7 +145,6 @@ def call_api(
 		if expiry == requests_cache.DO_NOT_CACHE:
 			kwargs['force_refresh'] = True
 	kwargs['cookies'] = {'_ncfa': get_ncfa_cookie()} if needs_auth else {}
-	# TODO: Do we need to ensure any cookies from the response get saved to the session either way?
 
 	if '://' not in url:
 		url = f'https://www.geoguessr.com/{url.removeprefix("/")}'
