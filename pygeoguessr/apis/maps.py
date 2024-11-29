@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 
 import pydantic
 
@@ -8,6 +8,7 @@ from pygeoguessr.api import call_api, call_api_async
 from pygeoguessr.models import Map, MapImages
 from pygeoguessr.settings import BaseModel
 from pygeoguessr.types import CountryCode, MapSlug
+from pygeoguessr.utils import x_or_none
 
 if TYPE_CHECKING:
 	import aiohttp
@@ -19,7 +20,7 @@ class ExplorerMap(BaseModel):
 	id: str
 	slug: MapSlug
 	name: str
-	countryCode: CountryCode
+	countryCode: Annotated[CountryCode | None, pydantic.BeforeValidator(x_or_none)]
 	medal: int  # Not at all sure what this is supposed to do, it's always 0?
 	images: MapImages
 
