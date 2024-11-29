@@ -222,7 +222,6 @@ async def call_api_async(
 	if expiry:
 		kwargs['expire_after'] = expiry
 	cookies = {'_ncfa': get_ncfa_cookie()} if needs_auth else {}
-	# TODO: Do we need to ensure any cookies from the response get saved to the session either way?
 
 	async with (
 		cache_disabler,
