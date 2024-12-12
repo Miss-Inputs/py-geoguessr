@@ -8,7 +8,7 @@ import pydantic
 
 from pygeoguessr.settings import BaseModel
 
-# ruff: noqa: TCH001
+# ruff: noqa: TC001
 from .types import CompetitiveGameMode, CountryCode, GameToken, MapSlug, UserID, UserType, XPReason
 
 
@@ -259,7 +259,7 @@ class Map(BaseModel):
 	averageScore: int = pydantic.Field(ge=0)
 	"""Average score of all normal games on this map"""
 	avatar: MapAvatar
-	difficulty: Literal['VERY EASY', 'EASY', 'MEDIUM', 'HARD', 'VERY HARD', None]
+	difficulty: Literal['VERY EASY', 'EASY', 'MEDIUM', 'HARD', 'VERY HARD'] | None
 	"""String version of difficultyLevel, displayed on the map page"""
 	difficultyLevel: MapDifficulty
 	"""How difficult this map seems to be as decided by averageScore"""

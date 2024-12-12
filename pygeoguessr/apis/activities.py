@@ -8,7 +8,7 @@ import pydantic
 from pygeoguessr.api import call_api, call_api_async, get_default_async_session
 from pygeoguessr.settings import BaseModel
 
-# ruff: noqa: TCH001
+# ruff: noqa: TC001
 from pygeoguessr.types import (
 	ChallengeToken,
 	CompetitiveGameMode,

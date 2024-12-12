@@ -9,7 +9,7 @@ from pygeoguessr.settings import BaseModel
 from pygeoguessr.types import CompetitiveGameMode, LobbyToken, MapSlug, PartyID, QuizID, UserID
 from pygeoguessr.utils import x_or_none
 
-# ruff: noqa: TCH001
+# ruff: noqa: TC001
 from .common import MovementOptions, MultiplayerGameType, Player
 
 if TYPE_CHECKING:

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Literal
 
-#ruff: noqa: TCH001, TCH002
+#ruff: noqa: TC001, TC002
 import pydantic
 
 from pygeoguessr.api import call_api, call_api_async

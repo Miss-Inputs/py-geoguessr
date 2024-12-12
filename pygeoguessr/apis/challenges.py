@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Annotated, Literal
 
 import pydantic
 
-# ruff: noqa: TCH001
+# ruff: noqa: TC001
 from pygeoguessr.api import NotFoundError, call_api, call_api_async, get_default_async_session
 from pygeoguessr.models import User
 from pygeoguessr.settings import BaseModel

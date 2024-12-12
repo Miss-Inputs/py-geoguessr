@@ -2,7 +2,7 @@
 
 from enum import StrEnum
 
-# ruff: noqa: TCH001
+# ruff: noqa: TC001
 from pygeoguessr.api import call_api
 from pygeoguessr.models import DivisionInfo, ProgressRankDivision, UserAvatar
 from pygeoguessr.settings import BaseModel

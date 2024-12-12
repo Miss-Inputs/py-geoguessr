@@ -2,7 +2,7 @@ import logging
 from enum import IntEnum
 from typing import TYPE_CHECKING
 
-#ruff: noqa: TCH001
+#ruff: noqa: TC001
 from pygeoguessr.api import NotFoundError, call_api, call_api_async
 from pygeoguessr.settings import BaseModel
 from pygeoguessr.types import CountryCode

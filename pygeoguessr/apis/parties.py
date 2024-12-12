@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Literal
 
 import pydantic
 
-#ruff: noqa: TCH001, TCH002
+#ruff: noqa: TC001, TC002
 from pygeoguessr.api import NotFoundError, call_api, call_api_async
 from pygeoguessr.apis.multiplayer.lobby import AllowedCommunication
 from pygeoguessr.settings import BaseModel
