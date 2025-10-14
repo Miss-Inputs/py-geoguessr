@@ -59,7 +59,10 @@ def get_default_session(*, cached: bool = True) -> requests.Session:
 
 
 @cache
-def _get_async_cache():
+def _get_async_cache(*, use_sqlite: bool = True):
+	if use_sqlite:
+		cache_path = Path('~/.cache/geoguessr-async.sqlite')
+		return aiohttp_client_cache.SQLiteBackend(str(cache_path), allowed_methods={'GET', 'POST'})
 	cache_path = Path('~/.cache/geoguessr-async')
 	# We need POST for e.g. the geocoding API, anything that actually changes things should just use DO_NOT_CACHE
 	return aiohttp_client_cache.FileBackend(cache_path, allowed_methods={'GET', 'POST'})
@@ -69,16 +72,19 @@ async def clear_expired_cache_async():
 	await _get_async_cache().delete_expired_responses()
 
 
-def get_default_async_session(*, cached: bool = True) -> aiohttp.ClientSession:
+def get_default_async_session(
+	*, cached: bool = True, use_sqlite_cache: bool = True
+) -> aiohttp.ClientSession:
 	"""Gets a session for use with the async functions, which may be a cached session by default but optionally not.
 
 	Returns:
 		ClientSession or CachedSession"""
-	if not cached:
-		return aiohttp.ClientSession()
-	with warnings.catch_warnings(action='ignore', category=DeprecationWarning):
-		# aiohttp warns about CachedSession setting attributes, but that doesn't have anything to do with us other than we use it
-		session = CachedAsyncSession(cache=_get_async_cache())
+	if cached:
+		with warnings.catch_warnings(action='ignore', category=DeprecationWarning):
+			# aiohttp warns about CachedSession setting attributes, but that doesn't have anything to do with us other than we use it
+			session = CachedAsyncSession(cache=_get_async_cache(use_sqlite=use_sqlite_cache))
+	else:
+		session = aiohttp.ClientSession()
 	session.headers['User-Agent'] = user_agent
 	return session
 
