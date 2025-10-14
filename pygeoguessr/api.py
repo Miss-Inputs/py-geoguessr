@@ -211,11 +211,12 @@ async def call_api_async(
 		cache_disabler = session.disabled()
 		in_cache = False
 	else:
-		in_cache = (
-			await session.cache.has_url(url, method, params=params, json=json_body)
-			if isinstance(session, CachedAsyncSession)
-			else False
-		)
+		async with _semaphore:
+			in_cache = (
+				await session.cache.has_url(url, method, params=params, json=json_body)
+				if isinstance(session, CachedAsyncSession)
+				else False
+			)
 
 	sem = contextlib.nullcontext() if in_cache else _semaphore
 	if expiry:

@@ -96,11 +96,12 @@ async def get_official_maps_async(session: 'aiohttp.ClientSession | None' = None
 
 def _get_custom_streak_maps_page(per_page: int = 50, page: int = 0) -> Sequence[Map]:
 	params = {'count': per_page, 'page': page}
+	#Might not work now? This seems to ignore the page parameter
 	return map_list_adapter.validate_json(call_api('/api/v3/social/maps/browse/streaks', params))
 
 
 def get_custom_streak_maps(per_page: int = 50) -> Sequence[Map]:
-	"""Returns maps that are available for custom streak games."""
+	"""Returns maps that are available for custom streak games. Note: This method might not work, and infinitely loop."""
 	maps = []
 	page_num = 0
 	while True:
@@ -123,7 +124,7 @@ async def _get_custom_streak_maps_page_async(
 async def get_custom_streak_maps_async(
 	per_page: int = 50, session: 'aiohttp.ClientSession|None' = None
 ) -> Sequence[Map]:
-	"""Returns maps that are available for custom streak games."""
+	"""Returns maps that are available for custom streak games. Note: This method might not work, and infinitely loop."""
 	maps = []
 	page_num = 0
 	while True:

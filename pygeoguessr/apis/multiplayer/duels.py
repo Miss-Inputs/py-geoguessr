@@ -38,7 +38,6 @@ class DuelGuess(BaseModel):
 class DuelPlayer(BaseModel):
 	playerId: UserID
 	guesses: list[DuelGuess]
-	rank: int
 	rating: int
 	countryCode: CountryCode
 	progressChange: ProgressChange | None
@@ -157,6 +156,17 @@ class DuelOptions(BaseModel):
 	masterControlAutoStartRounds: bool
 	gameTimeOut: timedelta
 	"""e.g. 7200 seconds?"""
+	individualInitialHealth:  bool
+	initialHealthTeamOne: int
+	initialHealthTeamTwo: int
+	consumedLocationsIdentifier: str
+	"""??????"""
+	useCuratedLocations: bool
+	extraWaitTimeBetweenRounds: timedelta
+	"""? usually 0 seconds"""
+	roundCountdownDelay: timedelta
+	"""Usually 4 seconds"""
+	botBehaviors: None
 
 
 class Duel(BaseModel):
@@ -174,6 +184,7 @@ class Duel(BaseModel):
 	initialHealth: int
 	maxNumberOfRounds: int
 	result: DuelResult
+	isPaused: bool
 
 
 def get_duel_details(lobby: LobbyToken) -> Duel:

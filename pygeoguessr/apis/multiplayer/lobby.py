@@ -76,6 +76,9 @@ class DuelGameOptions(MovementOptions):
 	disableMultipliers: bool
 	multiplierIncrement: int = pydantic.Field(examples=[5])
 	disableHealing: bool
+	individualInitialHealth: bool
+	initialHealthTeamOne: int
+	initialHealthTeamTwo: int
 
 
 class BattleRoyaleGameOptions(MovementOptions):
@@ -102,6 +105,7 @@ class LiveChallengeOptions(MovementOptions):
 	mapSlug: MapSlug
 	roundTime: timedelta
 	roundCount: int
+
 
 class BullseyeLobby(BaseLobby):
 	gameType: Literal[MultiplayerGameType.Bullseye]

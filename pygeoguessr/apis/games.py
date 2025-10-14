@@ -140,8 +140,9 @@ class Game(BaseModel):
 	streakType: StreakType
 	map: MapSlug
 	mapName: str
-	panoramaProvider: Literal[0]
-	"""Maybe this is a different number for Mapillary when that was a thing"""
+	panoramaProvider: Literal[0, 1]
+	"""Maybe this is a different number for Mapillary when that was a thing
+	I don't know why it's sometimes 1, that's weird"""
 	bounds: MapBounds
 	round: int  # Current round you are up to, or roundCount if finished
 	rounds: list[GameRound]

@@ -275,6 +275,7 @@ class Map(BaseModel):
 	likes: int
 	locationSelectionMode: MapSelectionMode
 	"""How the map was made, and therefore how locations are chosen. I don't know how official maps (0) work exactly in that sense, maybe it's a secret"""
+	tags: list[str]
 
 
 class LevelInfo(BaseModel):
