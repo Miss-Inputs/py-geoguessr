@@ -4,7 +4,7 @@ from enum import StrEnum
 
 # ruff: noqa: TC001
 from pygeoguessr.api import call_api
-from pygeoguessr.models import DivisionInfo, ProgressRankDivision, UserAvatar
+from pygeoguessr.models import Club, DivisionInfo, ProgressRankDivision, UserAvatar
 from pygeoguessr.settings import BaseModel
 from pygeoguessr.types import CountryCode, LobbyToken, UserID
 
@@ -57,6 +57,7 @@ class Player(BaseModel):
 	competitive: PlayerCompetitiveInfo
 	avatar: UserAvatar
 	isGuest: bool
+	club: Club | None
 
 
 def get_battle_royale_details(lobby: LobbyToken):

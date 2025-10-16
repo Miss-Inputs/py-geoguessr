@@ -98,6 +98,7 @@ XPReason = Literal[
 	'Marathon',
 	'HpBonus',
 	'Untouchable',
+	'FastKnockout',
 ]
 
 

@@ -2,7 +2,7 @@
 
 import datetime
 from enum import IntEnum, StrEnum
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal
 
 import pydantic
 
@@ -115,7 +115,13 @@ class Wallet(BaseModel):
 	mobileCoins: int
 
 
-def _ignore_invalid_date(s):
+class Club(BaseModel):
+	tag: str
+	clubId: str
+	level: int
+
+
+def _ignore_invalid_date(s: Any):
 	if isinstance(s, str) and s == '0001-01-01T00:00:00.0000000Z':
 		return None
 	return s
@@ -143,6 +149,7 @@ class User(BaseModel):
 	countryCode: CountryCode | None
 	"""Hmm, this can have "xf" (e.g. BOKSA/5b6ae3177135fa0e48b4df1f) which doesn't seem to display as a flag"""
 	br: BattleRoyaleInfo
+	club: Club | None = None
 
 	# I'm guessing these ones wouldn't be static and would be dependent on what contains the user info?
 	streakProgress: None
@@ -170,6 +177,10 @@ class User(BaseModel):
 	"""May be midnight 1 Jan 2000 if never changed"""
 	isCreator: bool
 	isAppAnonymous: bool
+	customImage: str | None
+	"""e.g. pin/whatever.png"""
+	lastClaimedLevel: int
+	steamUserType: int | None = None  # why
 
 
 class Onboarding(BaseModel):
@@ -389,3 +400,4 @@ class ProgressChange(BaseModel):
 	"""Only for multiplayer games"""
 	rankedSystemProgress: RankedSystemProgress | None
 	rankedTeamDuelsProgress: RankedTeamDuelsProgress | None
+	quickplayDuelsProgress: Any | None  # nah don't care

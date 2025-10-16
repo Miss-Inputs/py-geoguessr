@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from enum import StrEnum
-from typing import TYPE_CHECKING, Annotated, Literal
+from typing import TYPE_CHECKING, Annotated, Any, Literal
 
-# ruff: noqa: TC001, TC002
+# ruff: noqa: TC001
 import pydantic
 
 from pygeoguessr.api import call_api, call_api_async
@@ -43,6 +43,7 @@ class DuelPlayer(BaseModel):
 	progressChange: ProgressChange | None
 	pin: LatLng | None
 	helpRequested: bool
+	isSteam: bool
 
 
 class DuelRoundResult(BaseModel):
@@ -137,7 +138,7 @@ class DuelOptions(BaseModel):
 	movementOptions: MovementOptions
 	mapSlug: MapSlug
 	isRated: bool
-	map: DuelMap
+	map: DuelMap | None
 	duelRoundOptions: list[None]  # TODO: Empty list?
 	roundsWithoutDamageMultiplier: int
 	disableMultipliers: bool
@@ -156,7 +157,7 @@ class DuelOptions(BaseModel):
 	masterControlAutoStartRounds: bool
 	gameTimeOut: timedelta
 	"""e.g. 7200 seconds?"""
-	individualInitialHealth:  bool
+	individualInitialHealth: bool
 	initialHealthTeamOne: int
 	initialHealthTeamTwo: int
 	consumedLocationsIdentifier: str
@@ -166,7 +167,8 @@ class DuelOptions(BaseModel):
 	"""? usually 0 seconds"""
 	roundCountdownDelay: timedelta
 	"""Usually 4 seconds"""
-	botBehaviors: None
+	botBehaviors: Any | None
+	"""??? empty dict?"""
 
 
 class Duel(BaseModel):
@@ -174,17 +176,17 @@ class Duel(BaseModel):
 	teams: list[DuelTeam]
 	rounds: list[DuelRound]
 	currentRoundNumber: int
-	status: Literal[
-		'Finished'
-	]  # TODO: What does this look like for unfinished duels… but I would need someone who's willing to sit there while I mess with the API, lol
+	status: Literal['Created', 'Finished']
 	version: int
 	options: DuelOptions
 	movementOptions: MovementOptions
-	mapBounds: MapBounds
+	mapBounds: MapBounds | None
 	initialHealth: int
 	maxNumberOfRounds: int
-	result: DuelResult
+	result: DuelResult | None
+	"""None if the duel is not finished yet"""
 	isPaused: bool
+	gameServerNodeId: str | None
 
 
 def get_duel_details(lobby: LobbyToken) -> Duel:
