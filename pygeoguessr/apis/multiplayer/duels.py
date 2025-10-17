@@ -39,9 +39,11 @@ class DuelPlayer(BaseModel):
 	playerId: UserID
 	guesses: list[DuelGuess]
 	rating: int
+	"""This seems to always be 700 for the player?"""
 	countryCode: CountryCode
 	progressChange: ProgressChange | None
 	pin: LatLng | None
+	"""Often null but sometimes this is in Alcatraz? Not sure what this is for"""
 	helpRequested: bool
 	isSteam: bool
 

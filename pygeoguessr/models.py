@@ -395,9 +395,9 @@ class ProgressChange(BaseModel):
 	medal: Literal[0, 'None']  # TODO: What actually is this? Not a medal in the usual sense
 
 	seasonProgress: SeasonProgress | None = None
-	"""Only for multiplayer games"""
+	"""Only for multiplayer games, though does not seem to be a field anymore"""
 	competitiveProgress: CompetitiveProgress | None
-	"""Only for multiplayer games"""
+	"""Only for multiplayer games, though seems to now just be always null"""
 	rankedSystemProgress: RankedSystemProgress | None
 	rankedTeamDuelsProgress: RankedTeamDuelsProgress | None
 	quickplayDuelsProgress: Any | None  # nah don't care

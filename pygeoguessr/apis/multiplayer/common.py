@@ -36,6 +36,7 @@ class PlayerRank(BaseModel):
 class PlayerCompetitiveInfo(BaseModel):
 	rating: int
 	division: DivisionInfo
+	"""Always says gold?"""
 
 
 class Player(BaseModel):
@@ -48,11 +49,13 @@ class Player(BaseModel):
 	avatarPath: str
 	level: int
 	titleTierId: int
-	division: str  # TODO enum (e.g. Bronze)
+	division: str
+	"""This seems to always say bronze?"""
 	performanceStreak: (
 		str  # TODO: Enum (e.g. None, but surely there are other more interesting values)
 	)
 	rank: PlayerRank
+	"""Always has every field set to 0?"""
 	team: str
 	competitive: PlayerCompetitiveInfo
 	avatar: UserAvatar
