@@ -136,7 +136,8 @@ class User(BaseModel):
 	created: _MaybeDate
 	isProUser: bool
 	type: UserType
-	consumedTrial: bool
+	consumedTrial: bool | None=None
+	"""Maybe not there anymore"""
 	isVerified: bool
 	pin: UserPin
 	fullBodyPin: str
