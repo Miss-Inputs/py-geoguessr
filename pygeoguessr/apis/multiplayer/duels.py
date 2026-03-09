@@ -193,7 +193,7 @@ class Duel(BaseModel):
 
 def get_duel_details(lobby: LobbyToken) -> Duel:
 	return Duel.model_validate_json(
-		call_api(f'https://game-server.geoguessr.com/api/duels/{lobby}')
+		call_api(f'https://game-server.geoguessr.com/api/duels/{lobby}', needs_auth=True)
 	)
 
 
@@ -201,5 +201,7 @@ async def get_duel_details_async(
 	lobby: LobbyToken, session: 'aiohttp.ClientSession | None' = None
 ) -> Duel:
 	return Duel.model_validate_json(
-		await call_api_async(f'https://game-server.geoguessr.com/api/duels/{lobby}', session)
+		await call_api_async(
+			f'https://game-server.geoguessr.com/api/duels/{lobby}', session, needs_auth=True
+		)
 	)
